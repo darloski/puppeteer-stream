@@ -111,7 +111,8 @@ export async function launch(
 
 	await browser.videoCaptureExtension.exposeFunction("sendData", (opts: any) => {
 		const data = Buffer.from(str2ab(opts.data));
-		browser.encoders?.get(opts.id)?.push(data);
+		const timecode = opts.timecode;
+		browser.encoders?.get(opts.id)?.push({data, timecode});
 	});
 
 	await browser.videoCaptureExtension.exposeFunction("log", (...opts: any) => {

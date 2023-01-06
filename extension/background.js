@@ -41,11 +41,13 @@ function START_RECORDING({ index, video, audio, frameSize, audioBitsPerSecond, v
 				if (event.data.size > 0) {
 					const buffer = await event.data.arrayBuffer();
 					const data = arrayBufferToString(buffer);
+					const timecode = event.timecode;
 
 					if (window.sendData) {
 						window.sendData({
 							id: index,
 							data,
+							timecode
 						});
 					}
 				}
